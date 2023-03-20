@@ -37,3 +37,9 @@ Don’t forget to run ``npm install`` from the terminal of your project folder t
 ## 0. npm run dev 0-main.js 
 
 ## 1. npm run dev 1-main.js
+
+## 2. npm run dev 2-main.js
+
+## Test
+npm test
+
