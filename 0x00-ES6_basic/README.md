@@ -34,3 +34,6 @@ in your project directory:
 
 Don’t forget to run ``npm install`` from the terminal of your project folder to install all necessary project dependencies.
 
+## 0. npm run dev 0-main.js 
+
+## 1. npm run dev 1-main.js
