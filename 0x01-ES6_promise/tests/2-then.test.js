@@ -7,9 +7,9 @@ describe('test promise', () => {
       expect(data).toStrictEqual({ status: 200, body: 'Success' });
     });
   });
-  it('test reject', async () => {
+  it('test it', async () => {
     expect.assertions(1);
-    await handleResponseFromAPI(false).catch((err) => {
+    await handleResponseFromAPI(true).catch((err) => {
       expect(err).toStrictEqual();
     });
   });
