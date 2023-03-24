@@ -32,7 +32,7 @@ export default class Currency {
   }
 
   set code(newvalue) {
-    if (typeof value !== 'string') {
+    if (typeof newvalue !== 'string') {
       throw new TypeError('Code must be a string');
     }
     this._code = newvalue;
