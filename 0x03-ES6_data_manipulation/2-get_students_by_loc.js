@@ -1,11 +1,8 @@
 function getStudentsByLocation(student, city) {
-  const list = [];
-  return student.filter((d) => {
-    if (d.location === city) {
-      list.push(d);
-    }
-    return list;
-  });
+  if (student instanceof Array) {
+    return student.filter((d) => d.location === city);
+  }
+  return [];
 }
 
 module.exports = getStudentsByLocation;
