@@ -1,10 +1,10 @@
 /**
  * Displays a message on the STDOUT.
- * @param {String} msg The message to display.
+ * @param {String} d The message to display.
  */
 
 const displayMessage = (d) => {
-  process.stdout.write(`${d}\n`);
+  console.log(d);
 };
 
 module.exports = displayMessage;
