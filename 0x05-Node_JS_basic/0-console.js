@@ -1,7 +1,10 @@
-#!/usr/bin/node
+/**
+ * Displays a message on the STDOUT.
+ * @param {String} msg The message to display.
+ */
 
-function displayMessage(d) {
+const displayMessage = (d) => {
   process.stdout.write(`${d}\n`);
-}
+};
 
 module.exports = displayMessage;
