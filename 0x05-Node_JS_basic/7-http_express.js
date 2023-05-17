@@ -1,7 +1,7 @@
-const http = require('http');
+const express = require('express');
 const fs = require('fs');
 
-const hostname = '0.0.0.0';
+const app = express();
 const port = 1245;
 const DbFile = process.argv.length > 2 ? process.argv[2] : '';
 
@@ -39,7 +39,9 @@ const countStudents = (path) => new Promise((resolve, reject) => {
       }
 
       const totalStudents = Object.values(studentGroups).flat().length;
-      const response = [`Number of students: ${totalStudents}`];
+      const response = ['This is the list of our students'];
+      const res = [`Number of students: ${totalStudents}`];
+      response.push(res);
 
       for (const [field, group] of Object.entries(studentGroups)) {
         const studentNames = group.map((student) => student.firstname).join(', ');
@@ -51,34 +53,26 @@ const countStudents = (path) => new Promise((resolve, reject) => {
   });
 });
 
-const app = http.createServer(async (req, res) => {
-  if (req.url === '/') {
-    res.setHeader('Content-Type', 'text/plain');
+app.get('/', (req, res) => {
+  res.send('Hello Holberton School!');
+});
+
+app.get('/students', async (req, res) => {
+  try {
+    const studentList = await countStudents(DbFile);
+    const response = studentList.join('\n');
     res.statusCode = 200;
-    res.end('Hello Holberton School!');
-  } else if (req.url === '/students') {
-    try {
-      const path = DbFile;
-      const studentList = await countStudents(path);
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      res.write('This is the list of our students\n');
-      for (const student of studentList) {
-        res.write(`${student} \n`);
-      }
-      res.end();
-    } catch (error) {
-      res.statusCode = 500;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end('Error processing students.');
-    }
-  } else {
-    res.statusCode = 404;
     res.setHeader('Content-Type', 'text/plain');
-    res.end('Page not found.');
+    res.send(response);
+  } catch (error) {
+    res.statusCode = 500;
+    res.setHeader('Content-Type', 'text/plain');
+    res.send('Error processing students.');
   }
 });
 
-app.listen(port, hostname);
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+});
 
 module.exports = app;
